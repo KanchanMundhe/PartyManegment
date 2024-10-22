@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-header text-white" style="background-color: #334d70 ;">
+            <h4 class="text-center">Login</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" formControlName="username" placeholder="Enter Username">
+                <div class="text-danger" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+                  Username is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" placeholder="Enter Password" class="form-control" formControlName="password">
+                <div class="text-danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+                  Password is required
+                </div>
+              </div>
+              <div class="text-danger mb-3" *ngIf="error">{{error}}</div>
+              <button type="submit" class="btn btn-sm btn-primary mx-auto" [disabled]="loginForm.invalid">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

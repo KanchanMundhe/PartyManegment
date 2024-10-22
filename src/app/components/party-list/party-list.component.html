@@ -1,0 +1,36 @@
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Party List</h2>
+    <button class="btn btn-primary" routerLink="/parties/new">Add New Party</button>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let party of parties">
+          <td>{{party.name}}</td>
+          <td>{{party.company_name}}</td>
+          <td>{{party.mobile_no}}</td>
+          <td>{{party.email}}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" [routerLink]="['/parties', party.id]">View</button>
+            <button class="btn btn-sm btn-warning me-2" [routerLink]="['/parties', party.id, 'edit']">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteParty(party.id!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

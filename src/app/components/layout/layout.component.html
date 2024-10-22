@@ -1,0 +1,25 @@
+
+<header class="text-white"  style="background-color: #334d70;">
+    <a href="" class="logo"><img src="https://shenliktech.com/shen/assets/img/logo.png" alt=""> <span>Shenlik Tech.</span></a>
+
+    <ul class="navbarr">
+        <li><a routerLink="/parties/new" class="active">Add Party</a></li>
+        <li><a routerLink="/parties" onclick="scrollToSection('services')">Party List</a></li>
+        <li><a href="javascript:void(0);" onclick="scrollToSection('about')">About Us</a></li>
+        <li><a href="javascript:void(0);" onclick="scrollToSection('contact')">Contact</a></li>
+    </ul>
+
+    <div class="mainn">
+        <a href="https://www.instagram.com/" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.behance.com/" class="behance"><i class="bi bi-behance"></i></a>
+       
+    </div>
+</header>
+<body>
+    <div class="row mt-5">
+        <div class="col-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</body>

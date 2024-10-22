@@ -1,0 +1,225 @@
+<div class="row mt-5 ">
+  <div class="col-md-11 mx-auto">
+    <div class="card">
+      <div class="card-header" style="background-color: #334d70; height: 50px;">
+        <h5 class="text-white">{{ isEditMode ? 'Edit' : 'Create' }} Party</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="partyForm" (ngSubmit)="onSubmit()" class="needs-validation">
+          <!-- Basic Information -->
+
+          <div class="row">
+            <div class="col-md-3 ">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="name " formControlName="name">
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Company Name*</label>
+              <input type="text" class="form-control" formControlName="company_name" name="company_name " 
+                [class.is-invalid]="submitted && partyForm.get('company_name')?.invalid">
+              <div class="invalid-feedback">Company name is required</div>
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Mobile Number*</label>
+              <input type="text" class="form-control" formControlName="mobile_no" name="mobile_no "
+                [class.is-invalid]="submitted && partyForm.get('mobile_no')?.invalid">
+              <div class="invalid-feedback">Please enter a valid 10-digit mobile number</div>
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Telephone Number</label>
+              <input type="text" class="form-control" formControlName="telephone_no" name="telephone_no ">
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">WhatsApp Number</label>
+              <input type="text" class="form-control" formControlName="whatsapp_no" name="whatsapp_no ">
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email"  name="email "
+                [class.is-invalid]="submitted && partyForm.get('email')?.invalid">
+              <div class="invalid-feedback">Please enter a valid email address</div>
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Credit Limit*</label>
+              <input type="number" class="form-control" formControlName="credit_limit"  name="credit_limit "
+                [class.is-invalid]="submitted && partyForm.get('credit_limit')?.invalid">
+              <div class="invalid-feedback">Please enter a valid credit limit</div>
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" class="form-control" formControlName="date_of_birth" name="date_of_birth ">
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Anniversary Date</label>
+              <input type="date" class="form-control" formControlName="anniversary_date">
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">GSTIN</label>
+              <input type="text" class="form-control" formControlName="gstin">
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">PAN Number</label>
+              <input type="text" class="form-control" formControlName="pan_no">
+            </div>
+
+            <div class="col-md-12 ">
+              <label class="form-label">Remark</label>
+              <textarea class="form-control" formControlName="remark" rows="3"></textarea>
+            </div>
+
+            <div class="col-md-3 ">
+              <label class="form-label">Profile Image</label>
+              <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*">
+            </div>
+
+            <div class="col-md-3 ">
+              <div class="form-check mt-4">
+                <input type="checkbox" class="form-check-input" formControlName="login_access" id="loginAccess">
+                <label class="form-check-label" for="loginAccess">Login Access</label>
+              </div>
+            </div>
+
+            <div class="col-md-3 ">
+              <div class="form-check mt-4">
+                <input type="checkbox" class="form-check-input" formControlName="apply_tds" id="applyTds">
+                <label class="form-check-label" for="applyTds">Apply TDS</label>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Address Information -->
+          <div class="row">
+            <div class="col-md-12 p-3">
+              <div class="card ">
+                <div class="card-header text-white d-flex justify-content-between align-items-center"
+                  style="background-color: #334d70; height: 40px;">
+                  <h5 class="mb-0">Addresses</h5>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="addAddress()">Add Address</button>
+                </div>
+                <div class="card-body">
+                  <div formArrayName="address">
+                    <div *ngFor="let address of addressArray.controls; let i = index" [formGroupName]="i"
+                      class="border p-3 ">
+                      <div class="row">
+                        <div class="col-md-3 ">
+                          <label class="form-label">Address Line 1*</label>
+                          <input type="text" class="form-control" formControlName="address_line_1"
+                            [class.is-invalid]="submitted && address.get('address_line_1')?.invalid">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">Address Line 2</label>
+                          <input type="text" class="form-control" formControlName="address_line_2">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">Country*</label>
+                          <input type="text" class="form-control" formControlName="country"
+                            [class.is-invalid]="submitted && address.get('country')?.invalid">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">State*</label>
+                          <input type="text" class="form-control" formControlName="state"
+                            [class.is-invalid]="submitted && address.get('state')?.invalid">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">City*</label>
+                          <input type="text" class="form-control" formControlName="city"
+                            [class.is-invalid]="submitted && address.get('city')?.invalid">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">Pincode*</label>
+                          <input type="text" class="form-control" formControlName="pincode"
+                            [class.is-invalid]="submitted && address.get('pincode')?.invalid">
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">Remove
+                        Address</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bank Information -->
+          <div class="row">
+            <div class="col-12 p-3">
+              <div class="card ">
+                <div class="card-header d-flex justify-content-between align-items-center"
+                  style="background-color: #334d70; height: 40px;">
+                  <h5 class="mb-0">Bank Details</h5>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="addBank()">Add Bank</button>
+                </div>
+                <div class="card-body">
+                  <div formArrayName="bank">
+                    <div *ngFor="let bank of bankArray.controls; let i = index" [formGroupName]="i" class="border p-3 ">
+                      <div class="row">
+                        <div class="col-md-3 ">
+                          <label class="form-label">IFSC Code*</label>
+                          <input type="text" class="form-control" formControlName="bank_ifsc_code"
+                            [class.is-invalid]="submitted && bank.get('bank_ifsc_code')?.invalid">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">Bank Name*</label>
+                          <input type="text" class="form-control" formControlName="bank_name"
+                            [class.is-invalid]="submitted && bank.get('bank_name')?.invalid">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">Branch Name*</label>
+                          <input type="text" class="form-control" formControlName="branch_name"
+                            [class.is-invalid]="submitted && bank.get('branch_name')?.invalid">
+                        </div>
+
+                        <div class="col-md-3 ">
+                          <label class="form-label">Account Number*</label>
+                          <input type="text" class="form-control" formControlName="account_no"
+                            [class.is-invalid]="submitted && bank.get('account_no')?.invalid">
+                        </div>
+                        <div class="col-md-3 ">
+                          <label class="form-label">Account Holder Name*</label>
+                          <input type="text" class="form-control" formControlName="account_holder_name"
+                            [class.is-invalid]="submitted && bank.get('account_holder_name')?.invalid">
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="removeBank(i)">Remove Bank</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex gap-2 ">
+                <button type="submit" class="btn btn-primary" [disabled]="loading">
+                  <span class="spinner-border spinner-border-sm me-1" *ngIf="loading"></span>
+                  {{ isEditMode ? 'Update' : 'Create' }} Party
+                </button>
+                <button type="button" class="btn btn-secondary" routerLink="/parties">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
